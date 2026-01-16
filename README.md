@@ -34,9 +34,9 @@ cp -P .claude-starter/CLAUDE.md . && rm -rf .claude-starter
 
 ## 導入後にやること
 
-1. **`AGENTS.md` を編集** - プロジェクト固有の情報を記入（CLAUDE.md は symlink）
-2. **`.claude/settings.json` を確認** - 必要に応じて権限を調整
-3. **Claude Code を起動** - `claude` コマンドで開始
+1. **Claude Code または Codex CLI を起動**
+2. **`/init` を実行** - プロジェクトを分析して AGENTS.md を自動生成
+3. **`.claude/settings.json` を確認** - 必要に応じて権限を調整
 
 ## 含まれるもの
 
@@ -80,6 +80,7 @@ CLAUDE.md -> AGENTS.md     # シンボリックリンク
 
 | コマンド | 説明 |
 |----------|------|
+| `/init` | プロジェクトを分析して AGENTS.md を生成 |
 | `/research-lib <lib>` | ライブラリを調査して文書化 |
 | `/simplify <path>` | コードをシンプルにリファクタリング |
 | `/update-design` | 設計ドキュメントを更新 |
