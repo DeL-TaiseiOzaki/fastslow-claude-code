@@ -64,6 +64,17 @@ Strongly consider consulting for:
 - Library selection
 - Error handling strategy
 
+## NO Need to Consult
+
+Skip Codex for simple, straightforward tasks:
+
+- Simple file edits (typo fixes, small changes)
+- Following explicit user instructions
+- Standard operations (git commit, running tests, linting)
+- Tasks with clear, single solutions
+- Reading/searching files
+- Trivial code changes where the solution is obvious
+
 ## Quick Rule
 
 **If you pause to think "hmm, how should I do this?" → CONSULT CODEX**

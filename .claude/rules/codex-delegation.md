@@ -18,6 +18,16 @@ ALWAYS consult Codex BEFORE:
 3. **Implementation planning** - Multi-step tasks, multiple approaches
 4. **Trade-off evaluation** - Choosing between options
 
+## When NOT to Consult Codex
+
+Skip Codex for simple, straightforward tasks:
+
+- Simple file edits (typo fixes, small changes)
+- Following explicit user instructions
+- Standard operations (git commit, running tests)
+- Tasks with clear, single solutions
+- Reading/searching files
+
 ## Quick Check
 
 Ask yourself: "Am I about to make a non-trivial decision?"

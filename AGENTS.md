@@ -39,16 +39,29 @@ Agents that execute specialized tasks in independent context:
 | **debugger** | Error investigation & fix | "fix this error", "debug this" |
 | **refactorer** | Refactoring | "simplify this", "clean up" |
 
-### Skills (Auto-Trigger)
+### Skills (Use Proactively)
 
-Skills that activate automatically based on conversation:
+**IMPORTANT: Use these skills proactively. Don't wait for explicit user request.**
 
-| Skill | Purpose | Trigger Examples |
-|-------|---------|------------------|
-| **design-tracker** | Record design decisions | "record this", "architecture" |
-| **mcp-builder** | MCP server development guide | "MCP server", "FastMCP" |
-| **skill-creator** | Create new skills | "create a skill" |
-| **codex-system** | **PROACTIVELY** delegate to Codex CLI (System 2) for design, debugging, planning | design decisions, debugging, "think deeper" |
+| Skill | When to Use | How to Invoke |
+|-------|-------------|---------------|
+| **codex-system** | **ALWAYS** before design decisions, debugging, planning, trade-off evaluation | `/codex-system` or run `codex exec ...` |
+| **design-tracker** | When design/architecture decisions are made in conversation | `/design-tracker` |
+| **mcp-builder** | When building MCP servers or external API integrations | `/mcp-builder` |
+| **skill-creator** | When creating new skills | `/skill-creator` |
+
+#### Codex System (Most Important)
+
+**Codex CLI is your highly capable supporter.** Use it proactively:
+
+- Before implementing new features → Consult Codex for design
+- When debugging fails once → Stop and consult Codex
+- When multiple approaches exist → Ask Codex to evaluate trade-offs
+- When uncertain about anything → Just ask Codex
+
+```bash
+codex exec --model gpt-5-codex --sandbox read-only --full-auto "your question" 2>/dev/null
+```
 
 ### Commands (Explicit Invocation)
 
@@ -84,7 +97,7 @@ Rules to always follow (`.claude/rules/`):
 | Rule | Content |
 |------|---------|
 | **language** | Think in English, respond in Japanese |
-| **system2-delegation** | **ALWAYS consult Codex before design/debug/planning decisions** |
+| **codex-delegation** | **ALWAYS consult Codex before design/debug/planning decisions** |
 | **coding-principles** | Simplicity, single responsibility, early return, type hints |
 | **dev-environment** | uv, ruff, ty, marimo usage |
 | **security** | Secrets management, input validation, SQLi/XSS prevention |
@@ -149,7 +162,7 @@ After recording, report briefly like "Recorded in DESIGN.md".
 ├── agents/                # Sub-agents
 ├── rules/                 # Always-applied rules
 │   ├── language.md
-│   ├── system2-delegation.md
+│   ├── codex-delegation.md
 │   ├── coding-principles.md
 │   ├── dev-environment.md
 │   ├── security.md
