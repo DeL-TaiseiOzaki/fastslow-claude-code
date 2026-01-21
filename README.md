@@ -9,7 +9,7 @@ Claude Code (Fast/System 1) と Codex CLI (Slow/System 2) の設定を既存プ�
 git clone --depth 1 https://github.com/DeL-TaiseiOzaki/fastslow-claude-code.git .starter
 
 # 2. 必要なファイルをコピー
-cp -r .starter/.agent .starter/.claude .starter/.codex .starter/AGENTS.md .
+cp -r .starter/.claude .starter/.codex .starter/AGENTS.md .
 cp -P .starter/CLAUDE.md .
 
 # 3. クリーンアップ
@@ -22,16 +22,22 @@ claude  # Claude Code を起動
 
 **ワンライナー:**
 ```bash
-git clone --depth 1 https://github.com/DeL-TaiseiOzaki/fastslow-claude-code.git .starter && cp -r .starter/.agent .starter/.claude .starter/.codex .starter/AGENTS.md . && cp -P .starter/CLAUDE.md . && rm -rf .starter
+git clone --depth 1 https://github.com/DeL-TaiseiOzaki/fastslow-claude-code.git .starter && cp -r .starter/.claude .starter/.codex .starter/AGENTS.md . && cp -P .starter/CLAUDE.md . && rm -rf .starter
 ```
 
-## Codex CLI プロンプトの設定（任意）
+## Codex CLI のグローバル設定（初回のみ）
 
-Codex CLI のカスタムコマンドはユーザーレベルで設定が必要:
+Codex CLI が `.claude/` のコンテキストを読み込むために、以下の設定が必要です:
 
 ```bash
-# Codex 用プロンプトをコピー
-cp .codex/prompts/*.md ~/.codex/prompts/
+# 1. Codex 用グローバル指示をコピー
+cp .codex/AGENTS.md ~/.codex/AGENTS.md
+
+# 2. スキル機能を有効化（未設定の場合）
+cat >> ~/.codex/config.toml << 'EOF'
+[features]
+skills = true
+EOF
 ```
 
 ## 構成
@@ -39,17 +45,17 @@ cp .codex/prompts/*.md ~/.codex/prompts/
 ```
 .claude/          # Claude Code 設定
 ├── agents/       # サブエージェント（自動委譲）
+├── commands/     # コマンド（/init, /plan, /tdd 等）
+├── skills/       # スキル（自動発動）
 ├── rules/        # 常時適用ルール
 ├── docs/         # 知識ベース
 └── settings.json # 権限設定
 
-.agent/           # 共通ツール
-├── commands/     # コマンド（/init, /plan, /tdd 等）
-└── skills/       # スキル（自動発動）
-
 .codex/           # Codex CLI 設定
-├── skills/       # スキル（自動発動）
-└── prompts/      # プロンプト（~/.codex/prompts/ へコピー）
+├── AGENTS.md     # グローバル指示（~/.codex/ へコピー）
+├── config.toml   # 機能設定
+└── skills/       # スキル
+    └── context-loader/  # .claude/ コンテキスト読み込み
 
 AGENTS.md         # プロジェクト設定（両ツール共通）
 CLAUDE.md         # AGENTS.md へのシンボリックリンク
